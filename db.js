@@ -56,8 +56,8 @@ const usuarioSchema = new mongoose.Schema({
         canciones: [
             {
                 nombre: {
-                    type:String,
-                    required:true,
+                    type: String,
+                    required: true,
                 },
                 fecha: {
                     type: Date, validate: {
@@ -114,7 +114,8 @@ const usuarioSchema = new mongoose.Schema({
                     throw new Error(`No se pudo cambiar la contraseña de forma correcta: ${e}`)
                 }
             },
-        }
+        },
+        query: {}
     },
 )
 
@@ -133,21 +134,21 @@ usuarioSchema.pre('validate', function () {
 //Post de artista
 
 //Preguntar
-artistaSchema.post('deleteOne',function (doc) {
-    console.log('%s ha sido borrado',doc._id)
+artistaSchema.post('deleteOne', function (doc) {
+    console.log('%s ha sido borrado', doc._id)
 })
 
 //Métodos estáticos
 
 //Artista
-usuarioSchema.static.buscarPorNombreDeUsuario = async function (nombreUsuario) {
-    return usuarioSchema.findOne({nombre: nombreUsuario})
+usuarioSchema.statics.buscarPorNombreDeUsuario = async function (loginusuario) {
+    return Artista.where('login', loginusuario)
 }
 
 //Usuario
 
 artistaSchema.statics.editarArtista = async function () {
-
+    //¿Pasarle su _id o le pongo yo uno?
 }
 
 

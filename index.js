@@ -1,4 +1,5 @@
 const db = require("./db.js")
+const {altaUsuario} = require("./db");
 
 async function aplicacionMusica() {
     await db.conectar()
@@ -20,24 +21,32 @@ async function aplicacionMusica() {
     console.log("Se eliminó un genero del artista")
     console.log(artista)
 
-    // const usuario=await  db.altaUsuario( {
-    //     login:"Mondongo3",
-    //     password:"12345672",
-    //     canciones:[
-    //         {nombre:"All day",fecha:"1992-02-01"}
-    //     ],
-    //     artistas:[
-    //         {nombre:"nirvana",individualONo:false}
-    //     ],
-    //     albums:[
-    //         {nombre:"No remorse",numeroCanciones:10}
-    //     ]
-    // })
-    //
-    // console.log("Se creó un usuario")
-    // console.log(usuario)
+    const usuario=await  db.altaUsuario( {
+        login:"Mondongo3",
+        password:"12345672",
+        canciones:[
+            {nombre:"All day",fecha:"1992-02-01"}
+        ],
+        artistas:[
+            {nombre:"nirvana",individualONo:false}
+        ],
+        albums:[
+            {nombre:"No remorse",numeroCanciones:10}
+        ]
+    })
 
-   await db.desconectar
+    console.log("Se creó un usuario")
+    console.log(usuario)
+
+
+    //Llamada a buscar usuario y que me encuentre
+    // const usuarioEncontrado=await usuario.buscarPorNombreDeUsuario("Mondongo3")
+    // if (usuarioEncontrado) {
+    //     console.log("Se encontró a : "+usuarioEncontrado)
+    // } else {
+    //     console.log("No se encontró a nadie")
+    // }
+    // await db.desconectar
 }
 
 aplicacionMusica()
