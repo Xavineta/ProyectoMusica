@@ -4,7 +4,7 @@ async function aplicacionMusica() {
     await db.conectar()
 
     const artista= await db.altaArtista({
-        nombre:["Freddie Mercury,Brian May,John Deacon"],
+        nombre:["Freddie,brian,jhonn"],
         generos:["Rock","Rock Clásico"],
         banda:""
     })

@@ -57,7 +57,7 @@ const usuarioSchema = new mongoose.Schema({
         canciones: [
             {
                 nombre: String,
-                // required: true,
+                required: true,
                 fecha: {
                     type: Date, validate: {
                         validator: function (fecha) {
@@ -74,7 +74,7 @@ const usuarioSchema = new mongoose.Schema({
                 nombre: String,
                 individualONo: {
                     type: Boolean,
-                    // required: true
+                    required: true
                 }
             },
         ],
@@ -104,13 +104,6 @@ const usuarioSchema = new mongoose.Schema({
             }
         },
         methods: {
-
-//Error Handling in Method: In the cambiarPassword method, when catching errors from save(), it's a ' +
-// good practice to provide more specific error messages or handle different error cases appropriately. ' +
-// 'Currently, the error message just concatenates the caught error, which might not be
-// informative enough for debugging or handling specific scenarios.
-
-
             async cambiarPassword(passwordChanged) {
                 try {
                     this.password = passwordChanged
@@ -133,9 +126,6 @@ const Artista = mongoose.model("Artista", artistaSchema)
 //Artista
 artistaSchema.pre('save', function () {
     //Antes de hacer el save, poner el nombre de los artista/s en mayúscula a
-    for (let i = 0; i < artistaSchema.nombre.length; i++) {
-        artistaSchema.nombre[i].toUpperCase();
-    }
 })
 Usuario
 usuarioSchema.pre('validate', function () {
@@ -145,17 +135,12 @@ usuarioSchema.pre('validate', function () {
     }
 })
 
-//Post usuario (futuras versiones)
 
 //Post de artista
-//No estoy sacando ningún documento de mongoose.
-// usuarioSchema.post('init', function (doc) {
-//     console.log('%s fue inicializado desde la BD', doc.id)
-// })
+
 
 //Métodos estáticos
 
-//¿Diferencias entre static y statics?
 //Artista
 usuarioSchema.static.buscarPorNombreDeUsuario = async function (nombreUsuario) {
     return usuarioSchema.findOne({nombre: nombreUsuario})
@@ -163,7 +148,7 @@ usuarioSchema.static.buscarPorNombreDeUsuario = async function (nombreUsuario) {
 
 //Usuario
 
-artistaSchema.statics.editarArtista = async function (nombres, generos, banda) {
+artistaSchema.statics.editarArtista = async function () {
 
 }
 
@@ -171,15 +156,8 @@ artistaSchema.statics.editarArtista = async function (nombres, generos, banda) {
 //Exports
 
 exports.contarTotalGenerosPorNombre = async function (nombreGenero) {
-    return Artista.countDocuments({nombre: nombreGenero})
-}
 
-exports.altaArtistafavorito = async function (nombre, individual) {
-    this.nombre = nombre
-    this.individualONo = individual
-    //Hacer el save después para la comprobación
 }
-
 
 exports.altaArtista = async function (datosArtista) {
     return Artista.create(datosArtista);
