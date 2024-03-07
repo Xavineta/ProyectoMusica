@@ -4,9 +4,9 @@
 4. Funciones personalizadas de validación: OK
 5. Consultas (query) Por hacer
 6. Métodos:
-    1.1 De instancia: Hechos, pero falta por terminar algunos.
+    1.1 De instancia: OK
     1.2 Estáticos: Hacerlos
-7. Middleware: Pre y post : Pre hecho, falta por hacer el post.
+7. Middleware: Pre y post : POST
 8. Campos virtuales: OK
 
 

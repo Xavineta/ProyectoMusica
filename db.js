@@ -17,10 +17,9 @@ const artistaSchema = new mongoose.Schema({
         //Métodos de instancia
         methods: {
             async eliminarGenero(genero) {
-
-                for (var i = 0; i < this.generos; i++) {
+                for (var i = 0; i < this.generos.length; i++) {
                     if (this.generos[i] === genero) {
-                        this.generos[i].splice(i, 1)
+                        this.generos.splice(i, 1)
                         break;
                     }
                 }
@@ -56,8 +55,10 @@ const usuarioSchema = new mongoose.Schema({
         },
         canciones: [
             {
-                nombre: String,
-                required: true,
+                nombre: {
+                    type:String,
+                    required:true,
+                },
                 fecha: {
                     type: Date, validate: {
                         validator: function (fecha) {
@@ -121,13 +122,7 @@ const Usuario = mongoose.model("Usuario", usuarioSchema)
 const Artista = mongoose.model("Artista", artistaSchema)
 
 //Middleware
-
-//Pre
-//Artista
-artistaSchema.pre('save', function () {
-    //Antes de hacer el save, poner el nombre de los artista/s en mayúscula a
-})
-Usuario
+//Usuario
 usuarioSchema.pre('validate', function () {
     //Comprobar que se han introducido al menos dos album
     if (this.albums.length < 2) {
@@ -135,9 +130,12 @@ usuarioSchema.pre('validate', function () {
     }
 })
 
-
 //Post de artista
 
+//Preguntar
+artistaSchema.post('deleteOne',function (doc) {
+    console.log('%s ha sido borrado',doc._id)
+})
 
 //Métodos estáticos
 
