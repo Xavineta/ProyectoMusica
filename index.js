@@ -21,6 +21,9 @@ async function aplicacionMusica() {
     console.log("Se eliminó un genero del artista")
     console.log(artista)
 
+   console
+    console.log("Se contaron: "+await db.contarTotalGenerosPorNombre("Rock"))
+
     const usuario=await  db.altaUsuario( {
         login:"Mondongo3",
         password:"12345672",
@@ -35,18 +38,11 @@ async function aplicacionMusica() {
         ]
     })
 
+
     console.log("Se creó un usuario")
     console.log(usuario)
 
 
-    //Llamada a buscar usuario y que me encuentre
-    // const usuarioEncontrado=await usuario.buscarPorNombreDeUsuario("Mondongo3")
-    // if (usuarioEncontrado) {
-    //     console.log("Se encontró a : "+usuarioEncontrado)
-    // } else {
-    //     console.log("No se encontró a nadie")
-    // }
-    // await db.desconectar
 }
 
 aplicacionMusica()

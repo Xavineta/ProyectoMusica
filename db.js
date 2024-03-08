@@ -131,9 +131,7 @@ usuarioSchema.pre('validate', function () {
     }
 })
 
-//Post de artista
-
-//Preguntar
+//Post
 artistaSchema.post('deleteOne', function (doc) {
     console.log('%s ha sido borrado', doc._id)
 })
@@ -144,25 +142,21 @@ artistaSchema.post('deleteOne', function (doc) {
 usuarioSchema.statics.buscarPorNombreDeUsuario = async function (loginusuario) {
     return Artista.where('login', loginusuario)
 }
-
-//Usuario
-
-artistaSchema.statics.editarArtista = async function () {
-    //¿Pasarle su _id o le pongo yo uno?
+//Query
+exports.contarTotalGenerosPorNombre = async function (nombreGenero) {
+        return Artista.countDocuments(  {generos: {$in:[nombreGenero]}})
 }
 
-
-//Exports
-
-exports.contarTotalGenerosPorNombre = async function (nombreGenero) {
-
+//Query
+//Mostrar el nombre de los artistas que tengan a false si son inviduales
+exports.nombresDeArtistas =async function () {
+    return Usuario.find({artistas: {$elemMatch: {invidualONo:false}}})
 }
 
 exports.altaArtista = async function (datosArtista) {
     return Artista.create(datosArtista);
 }
 
-//Métodos de usuario export
 exports.altaUsuario = async function (datosUsuario) {
     return Usuario.create(datosUsuario);
 }
