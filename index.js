@@ -42,6 +42,8 @@ async function aplicacionMusica() {
 
     console.log("Nombres de artistas: ")
     console.log(await db.nombresDeArtistas())
+
+    console.log(await db.buscarBandasQueEmpiezanPorLetra("M"))
 }
 
 aplicacionMusica()

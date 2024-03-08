@@ -142,11 +142,16 @@ artistaSchema.post('deleteOne', function (doc) {
 
 //Usuario.
 usuarioSchema.statics.buscarPorNombreDeUsuario = async function (loginusuario) {
-    // return Usuario.where('login', loginusuario)
+    return Usuario.find({login:loginusuario})
 }
 
 exports.buscarPorNombreDeUsuario= async function(loginusuario) {
     return await  Usuario.buscarPorNombreDeUsuario(loginusuario)
+}
+
+//Artista
+artistaSchema.statics.buscarBandasQueEmpiezanPorLetra= async function(letra) {
+    return Artista.find({banda:{$regex:/^letra/}})
 }
 
 
@@ -159,6 +164,10 @@ exports.contarTotalGenerosPorNombre = async function (nombreGenero) {
 //Mostrar el nombre de los artistas que tengan a false si son inviduales
 exports.nombresDeArtistas = async function () {
     return  artistas = await Artista.find({individualONo: false}).select("nombre").exec()
+}
+
+exports.buscarBandasQueEmpiezanPorLetra = async function (letra) {
+    return await  Artista.buscarBandasQueEmpiezanPorLetra(letra)
 }
 
 exports.altaArtista = async function (datosArtista) {
