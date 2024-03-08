@@ -2,7 +2,7 @@
 2. Creación de esquemas: OK
 3. Creación de diversas restricciones de validación: OK
 4. Funciones personalizadas de validación: OK
-5. Consultas (query) Por hacer
+5. Consultas (query) Corregir
 6. Métodos:
     1.1 De instancia: OK
     1.2 Estáticos: Hacerlos

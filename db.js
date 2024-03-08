@@ -14,6 +14,12 @@ const artistaSchema = new mongoose.Schema({
         }
     },
     {
+        statics: {
+            artistaSinBanda() {
+                //Todos los artistas que no tengan
+                return this.find({banda: {$exists:true,$eq:""}})
+            }
+        },
         //Métodos de instancia
         methods: {
             async eliminarGenero(genero) {
@@ -29,7 +35,7 @@ const artistaSchema = new mongoose.Schema({
                 this.banda = banda
                 await this.save()
             }
-        }
+        },
     }
 )
 
@@ -138,10 +144,12 @@ artistaSchema.post('deleteOne', function (doc) {
 
 //Métodos estáticos
 
-//Artista
+//Usuario.
 usuarioSchema.statics.buscarPorNombreDeUsuario = async function (loginusuario) {
     return Artista.where('login', loginusuario)
 }
+
+
 //Query
 exports.contarTotalGenerosPorNombre = async function (nombreGenero) {
         return Artista.countDocuments(  {generos: {$in:[nombreGenero]}})

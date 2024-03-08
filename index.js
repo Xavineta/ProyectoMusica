@@ -21,7 +21,6 @@ async function aplicacionMusica() {
     console.log("Se eliminó un genero del artista")
     console.log(artista)
 
-   console
     console.log("Se contaron: "+await db.contarTotalGenerosPorNombre("Rock"))
 
     const usuario=await  db.altaUsuario( {
@@ -37,12 +36,10 @@ async function aplicacionMusica() {
             {nombre:"No remorse",numeroCanciones:10}
         ]
     })
-
-
     console.log("Se creó un usuario")
     console.log(usuario)
 
-
+    console.log("Nombres de artistas: "+await db.nombresDeArtistas())
 }
 
 aplicacionMusica()
