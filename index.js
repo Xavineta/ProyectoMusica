@@ -5,9 +5,10 @@ async function aplicacionMusica() {
     await db.conectar()
 
     const artista= await db.altaArtista({
-        nombre:["Freddie,brian,jhonn"],
-        generos:["Rock","Rock Clásico"],
-        banda:""
+        nombre:["Mercyful Fate"],
+        generos:["Canta"],
+        banda:"",
+        individualONo:false
     })
     console.log("Se creó un artista")
     console.log(artista)
@@ -24,13 +25,13 @@ async function aplicacionMusica() {
     console.log("Se contaron: "+await db.contarTotalGenerosPorNombre("Rock"))
 
     const usuario=await  db.altaUsuario( {
-        login:"Mondongo3",
-        password:"12345672",
+        login:"Mondongo41",
+        password:"12355622",
         canciones:[
             {nombre:"All day",fecha:"1992-02-01"}
         ],
         artistas:[
-            {nombre:"nirvana",individualONo:false}
+            {nombre:"queen"}
         ],
         albums:[
             {nombre:"No remorse",numeroCanciones:10}
@@ -39,7 +40,8 @@ async function aplicacionMusica() {
     console.log("Se creó un usuario")
     console.log(usuario)
 
-    console.log("Nombres de artistas: "+await db.nombresDeArtistas())
+    console.log("Nombres de artistas: ")
+    console.log(await db.nombresDeArtistas())
 }
 
 aplicacionMusica()

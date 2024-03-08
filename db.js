@@ -11,13 +11,17 @@ const artistaSchema = new mongoose.Schema({
         generos: [String],
         banda: {
             type: String
+        },
+        individualONo: {
+            type: Boolean,
+            required: true
         }
     },
     {
         statics: {
             artistaSinBanda() {
                 //Todos los artistas que no tengan
-                return this.find({banda: {$exists:true,$eq:""}})
+                return this.find({banda: {$exists: true, $eq: ""}})
             }
         },
         //Métodos de instancia
@@ -79,10 +83,6 @@ const usuarioSchema = new mongoose.Schema({
         artistas: [
             {
                 nombre: String,
-                individualONo: {
-                    type: Boolean,
-                    required: true
-                }
             },
         ],
         albums: [
@@ -152,13 +152,13 @@ usuarioSchema.statics.buscarPorNombreDeUsuario = async function (loginusuario) {
 
 //Query
 exports.contarTotalGenerosPorNombre = async function (nombreGenero) {
-        return Artista.countDocuments(  {generos: {$in:[nombreGenero]}})
+     return Artista.countDocuments({generos: {$in: [nombreGenero]}})
 }
 
 //Query
 //Mostrar el nombre de los artistas que tengan a false si son inviduales
-exports.nombresDeArtistas =async function () {
-    return Usuario.find({artistas: {$elemMatch: {invidualONo:false}}})
+exports.nombresDeArtistas = async function () {
+     return Artista.find({individualONo:false})
 }
 
 exports.altaArtista = async function (datosArtista) {
