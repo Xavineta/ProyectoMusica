@@ -4,23 +4,23 @@ const {altaUsuario} = require("./db");
 async function aplicacionMusica() {
     await db.conectar()
 
-    const artista= await db.altaArtista({
-        nombre:["Mercyful Fate"],
-        generos:["Canta"],
-        banda:"",
-        individualONo:false
-    })
-    console.log("Se creó un artista")
-    console.log(artista)
-
-
-    await artista.agregarBanda("Queen")
-    console.log("Se agregó una banda al artista")
-    console.log(artista)
-
-    await artista.eliminarGenero("Rock")
-    console.log("Se eliminó un genero del artista")
-    console.log(artista)
+    // const artista= await db.altaArtista({
+    //     nombre:["Mercyful Fate"],
+    //     generos:["Canta"],
+    //     banda:"",
+    //     individualONo:false
+    // })
+    // console.log("Se creó un artista")
+    // console.log(artista)
+    //
+    //
+    // await artista.agregarBanda("Queen")
+    // console.log("Se agregó una banda al artista")
+    // console.log(artista)
+    //
+    // await artista.eliminarGenero("Rock")
+    // console.log("Se eliminó un genero del artista")
+    // console.log(artista)
 
     console.log("Se contaron: "+await db.contarTotalGenerosPorNombre("Rock"))
 

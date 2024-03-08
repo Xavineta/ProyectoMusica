@@ -56,12 +56,8 @@ const usuarioSchema = new mongoose.Schema({
 
         },
         password: {
-            type: String, validate: {
-                validator: function (passwordChanged) {
-                    return (passwordChanged.length >= 8 && passwordChanged.length <= 20)
-                },
-                message: props => `${props.value}'Password no válido`
-            }
+            type: String,
+            required:true
         },
         canciones: [
             {
@@ -146,19 +142,23 @@ artistaSchema.post('deleteOne', function (doc) {
 
 //Usuario.
 usuarioSchema.statics.buscarPorNombreDeUsuario = async function (loginusuario) {
-    return Artista.where('login', loginusuario)
+    // return Usuario.where('login', loginusuario)
+}
+
+exports.buscarPorNombreDeUsuario= async function(loginusuario) {
+    return await  Usuario.buscarPorNombreDeUsuario(loginusuario)
 }
 
 
 //Query
 exports.contarTotalGenerosPorNombre = async function (nombreGenero) {
-     return Artista.countDocuments({generos: {$in: [nombreGenero]}})
+    return Artista.countDocuments({generos: {$in: [nombreGenero]}})
 }
 
 //Query
 //Mostrar el nombre de los artistas que tengan a false si son inviduales
 exports.nombresDeArtistas = async function () {
-     return Artista.find({individualONo:false})
+    return  artistas = await Artista.find({individualONo: false}).select("nombre").exec()
 }
 
 exports.altaArtista = async function (datosArtista) {
