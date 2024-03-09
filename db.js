@@ -150,10 +150,14 @@ exports.buscarPorNombreDeUsuario= async function(loginusuario) {
 }
 
 //Artista
-artistaSchema.statics.buscarBandasQueEmpiezanPorLetra= async function(letra) {
-    return Artista.find({banda:{$regex:/^letra/}})
-}
+    artistaSchema.statics.buscarBandasQueEmpiezanPorLetra= async function(letra) {
+        return Artista.find({banda: new RegExp('^'+letra)})
+    }
 
+
+exports.buscarBandasQueEmpiezanPorLetra = async function (letra) {
+    return await  Artista.buscarBandasQueEmpiezanPorLetra(letra)
+}
 
 //Query
 exports.contarTotalGenerosPorNombre = async function (nombreGenero) {
@@ -166,9 +170,6 @@ exports.nombresDeArtistas = async function () {
     return  artistas = await Artista.find({individualONo: false}).select("nombre").exec()
 }
 
-exports.buscarBandasQueEmpiezanPorLetra = async function (letra) {
-    return await  Artista.buscarBandasQueEmpiezanPorLetra(letra)
-}
 
 exports.altaArtista = async function (datosArtista) {
     return Artista.create(datosArtista);
