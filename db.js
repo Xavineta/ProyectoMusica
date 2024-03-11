@@ -121,22 +121,6 @@ const usuarioSchema = new mongoose.Schema({
     },
 )
 
-const Usuario = mongoose.model("Usuario", usuarioSchema)
-const Artista = mongoose.model("Artista", artistaSchema)
-
-//Middleware
-//Usuario
-usuarioSchema.pre('validate', function () {
-    //Comprobar que se han introducido al menos dos album
-    if (this.albums.length < 2) {
-        throw new Error("Error, debe introducir al menos dos album")
-    }
-})
-
-//Post
-artistaSchema.post('deleteOne', function (doc) {
-    console.log('%s ha sido borrado', doc._id)
-})
 
 //Métodos estáticos
 
@@ -150,9 +134,9 @@ exports.buscarPorNombreDeUsuario= async function(loginusuario) {
 }
 
 //Artista
-    artistaSchema.statics.buscarBandasQueEmpiezanPorLetra= async function(letra) {
-        return Artista.find({banda: new RegExp('^'+letra)})
-    }
+artistaSchema.statics.buscarBandasQueEmpiezanPorLetra= async function(letra) {
+    return Artista.find({banda: new RegExp('^'+letra)})
+}
 
 
 exports.buscarBandasQueEmpiezanPorLetra = async function (letra) {
@@ -178,6 +162,17 @@ exports.altaArtista = async function (datosArtista) {
 exports.altaUsuario = async function (datosUsuario) {
     return Usuario.create(datosUsuario);
 }
+
+
+const Usuario = mongoose.model("Usuario", usuarioSchema)
+const Artista = mongoose.model("Artista", artistaSchema)
+
+
+//Post
+artistaSchema.post('deleteOne', function (doc) {
+    console.log('%s ha sido borrado', doc._id)
+})
+
 //Métodos propios de la BD
 
 exports.desconectar = mongoose.disconnect()

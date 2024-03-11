@@ -1,5 +1,4 @@
 const db = require("./db.js")
-const {altaUsuario} = require("./db");
 
 async function aplicacionMusica() {
     await db.conectar()

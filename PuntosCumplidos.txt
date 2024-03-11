@@ -5,7 +5,7 @@
 5. Consultas (query) OK
 6. Métodos:
     1.1 De instancia: OK
-    1.2 Estáticos: Hacerlos
+    1.2 Estáticos: OK
 7. Middleware: Pre y post : OK
 8. Campos virtuales: OK
 
